@@ -1,14 +1,15 @@
 {
   "name": "swiggy",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a web app for swiggy based on ReactJs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Satyam Raj",
   "license": "ISC",
   "dependencies": {
     "react": "^18.3.1",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "parcel": "^2.12.0",
+    "prettier": "^3.4.2",
     "process": "^0.11.10"
   },
   "browserslist": [
