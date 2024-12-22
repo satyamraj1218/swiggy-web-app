@@ -1,16 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import resList from '../src/data/restaurantsList.json';
 
-/*
-* - Headers
-    - logo
-    - navItems
-* - Body
-    - card
-    - restaurants name
-* - Footer
-*
-*/
 const Headers = () => {
   return (
     <div className='headers'>
@@ -33,14 +24,33 @@ const Headers = () => {
 };
 
 const RestaurantCard = (props) => {
+  const { resData } = props;
+  const {
+    name,
+    areaName,
+    cuisines,
+    avgRating,
+    sla,
+    costForTwo,
+    cloudinaryImageId,
+  } = resData?.info;
+
   return (
     <div className='res-card'>
-      <img className='by-kilo' alt='biryani image' src={props.resImg}></img>
+      <img
+        className='by-kilo'
+        alt='image'
+        src={
+          'https://media-assets.swiggy.com/swiggy/image/upload/' +
+          cloudinaryImageId
+        }
+      ></img>
       <div>
-        <h3>{props.resName}</h3>
-        <h4>{props.resCuisine}</h4>
-        <h4>{props.resRating}</h4>
-        <h4>{props.resDelTime}</h4>
+        <h3>{name + ', ' + areaName}</h3>
+        <h4>{cuisines.join(', ')}</h4>
+        <h4>{avgRating}</h4>
+        <h4>{costForTwo}</h4>
+        <h4>{sla.slaString}</h4>
       </div>
     </div>
   );
@@ -51,34 +61,9 @@ const Body = () => {
     <div className='body'>
       <div className='search'>Search Your restaurants</div>
       <div className='res-container'>
-        <RestaurantCard
-          resImg='https://content3.jdmagicbox.com/v2/comp/delhi/j3/011pxx11.xx11.200108020736.z3j3/catalogue/handi-biryani-junction-rohini-sector-9-delhi-restaurants-0gw6tc0tvg.jpg'
-          resName='Biryani by Kilo'
-          resCuisine='Biryani, North Indian'
-          resRating='4.3 stars'
-          resDelTime='38 minutes'
-        />
-        <RestaurantCard
-          resImg='https://www.shutterstock.com/image-photo/burger-tomateoes-lettuce-pickles-on-600nw-2309539129.jpg'
-          resName='KFC'
-          resCuisine='Burger, Fast Food'
-          resRating='4.2 stars'
-          resDelTime='31 minutes'
-        />
-        <RestaurantCard
-          resImg='https://media.istockphoto.com/id/1253099922/photo/assortment-of-fresh-fruits-and-vegetables-juices-in-rainbow-colors.jpg?s=612x612&w=0&k=20&c=lFC0lAcR0FoPegoMTuJxc3fEAISbJVwZ1VmWNHzVEX8='
-          resName='Tasty Juice'
-          resCuisine='Milk Shake, Juice'
-          resRating='4.5 stars'
-          resDelTime='27 minutes'
-        />
-        <RestaurantCard
-          resImg='https://img.freepik.com/free-photo/gourmet-chicken-biryani-with-steamed-basmati-rice-generated-by-ai_188544-13480.jpg?semt=ais_hybrid'
-          resName='Meghana Foods'
-          resCuisine='Biryani'
-          resRating='4.3 stars'
-          resDelTime='23 minutes'
-        />
+        {resList.map((restaurant) => (
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        ))}
       </div>
     </div>
   );
