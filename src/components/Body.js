@@ -3,6 +3,7 @@ import RestaurantCard from './RestaurantCard';
 import { Shimmer } from './Shimmer';
 import { SWIGGY_WEB_API } from '../utils/constants';
 import { Link } from 'react-router';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -25,6 +26,16 @@ const Body = () => {
         ?.restaurants
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus) {
+    return (
+      <div>
+        <h1>You are offline right now.. Try back later</h1>
+      </div>
+    );
+  }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
